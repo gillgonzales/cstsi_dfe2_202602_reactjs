@@ -1,3 +1,5 @@
+import chalk from "chalk";
+
 export default function pot(num, exp) {
   return num ** exp;
 }
@@ -9,18 +11,20 @@ export const pow = (num, exp) => {
 export const pow2 = num => num ** 2;
 
 
-
 //OPERADOR THIS
 function Person() {
   // O contrutor Person() define `this` como uma instância dele mesmo.
   this.age = 0;
-
+  console.log(chalk.red(this.age))
   setInterval(function growUp() { //Interval loop
     // Em modo não estrito, a função growUp() define `this`
     // como o objeto global (porque é onde growUp() é executado.),
     // que é diferente ao `this`
     // definido pelo construtor Person().
-    this.age++;
+    // this.age++;
+    console.log(chalk.blue(this.age))
+    this.age = this.age + 1
+    console.log(chalk.green(this.age))
   }, 1000);
 }
 

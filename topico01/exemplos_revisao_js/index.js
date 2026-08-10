@@ -1,11 +1,11 @@
 import chalk from "chalk";
-import { exemploFilter, exemploFind, exemploForeach, exemploMap, exemploReduce } from "./modules/exemploArrayIterations.js";
-import { ordenaArray } from "./modules/exemploArraysFun.js";
-import potencia, { Person, Person2, Person3, pow, pow2 } from "./modules/exemploFuncArrowFun.js";
-import exemplosStrings from "./modules/exemploStrings.js";
-import { exemplosConst, exemplosLet } from "./modules/letConstExemplos.js";
-import { listProducts } from "./modules/listProducts.js";
-import numberBigInt from "./modules/numTypes.js"
+import { exemploFilter, exemploFind, exemploForeach, exemploMap, exemploReduce } from "./functions/exemploArrayIterations.js";
+import { ordenaArray } from "./functions/exemploArraysFun.js";
+import potencia, {Person, Person2, Person3, pow, pow2} from "./functions/exemploFuncArrowFun.js";
+import exemplosStrings from "./functions/exemploStrings.js";
+import { exemplosConst, exemplosLet } from "./functions/letConstExemplos.js";
+import { listProducts } from "./functions/listProducts.js";
+import numberBigInt from "./functions/numTypes.js"
 
 
 // exemplosLet()
@@ -17,26 +17,24 @@ import numberBigInt from "./modules/numTypes.js"
 // console.log(pow(2,3))
 // console.log(pow2(3))
 
-// let p1 = new Person()
+let p1 = new Person()
 
-// setTimeout(()=>{
-//     console.log(p1.age)
-//     // process.exit()
-// },5000);
+setTimeout(()=>{
+    console.log(p1.age)
+},5000);
 
-// let p2 = new Person2()
+let p2 = new Person2()
 
-// setTimeout(()=>{
-//     console.log(p2.age)
-//     // process.exit()
-// },5000);
+setTimeout(()=>{
+    console.log('p2 age',p2.age)
+},7000);
 
-// let p3 = new Person3()
+let p3 = new Person3()
 
-// setTimeout(()=>{
-//     console.log(p3.age)
-//     process.exit()
-// },7000);
+setTimeout(()=>{
+    console.log('age p3',p3.age)
+    process.exit()
+},9000);
 
 // ordenaArray()
 
@@ -52,4 +50,4 @@ import numberBigInt from "./modules/numTypes.js"
 
 // listProducts()
 
-console.log(chalk.blue(potencia(3,3)));
+// console.log(chalk.red(potencia(3,3)));
