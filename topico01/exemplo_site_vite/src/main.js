@@ -3,6 +3,7 @@ import javascriptLogo from './assets/javascript.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import { setupCounter } from './counter.js'
+import importarProdutos from './utils/importProducts.js'
 
 document.querySelector('#app').innerHTML = `
 <section id="center">
@@ -17,6 +18,9 @@ document.querySelector('#app').innerHTML = `
   </div>
   <button id="counter" type="button" class="counter"></button>
 </section>
+<hr>
+<div id=containerProds></div>
+<hr>
 
 <div class="ticks"></div>
 
@@ -58,3 +62,4 @@ document.querySelector('#app').innerHTML = `
 `
 
 setupCounter(document.querySelector('#counter'))
+importarProdutos()
