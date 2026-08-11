@@ -43,7 +43,7 @@ export function exemploForeachAnn() {
 //PROCURANDO UM ITEM COM FIND
 
 export function exemploFind() {
-    let busca = 'celta';
+    let busca = 'ka';
     console.log('\n----FIND---');
     console.log(
         carros.find((car) => {
@@ -53,7 +53,7 @@ export function exemploFind() {
 
   
 
-    busca = 'focus';
+    busca = 'ka';
     let indiceAchado = carros.findIndex(car => car === busca);
     console.log(
         indiceAchado >= 0
@@ -63,7 +63,7 @@ export function exemploFind() {
  
     console.log(
         num.find((n) => {
-            if (n % 2 == 0) return true;
+            if (n % 2 != 0) return true;
         })
     ); //retorna o primeiro número par encontrado
 
@@ -79,20 +79,20 @@ export function exemploFilter() {
     console.log('\n----FILTER---');
     let busca = 'gol';
     let naoGol = carros.filter(car => car != busca)
-    console.log(naoGol); //retorna array com os diferentes da busca
+    console.table(naoGol); //retorna array com os diferentes da busca
     console.log(carros)
-
+    
     // return
 
+    console.log(num)
     let pares = num.filter((n) => {
         if (n % 2 == 0)
             return true;
     })
-    console.log(pares); //retorna array com os pares
+    console.log({pares}); //retorna array com os pares
 
     let impares = num.filter(n => n % 2 != 0); //retorna array com os impares
     console.log({ impares }); //as {} é só para o console mostra o nome da variável
-
 }
 
 export function exemploMap() {
@@ -132,16 +132,13 @@ export function exemploReduce() {
 
     let numeros = [10, 2, -3, 4, 50];
     console.log(numeros.reduce((soma, item) =>{
-        console.log(`\t\t${soma}`);
+        console.log(`\t\t${item}=>${soma}`);
         return soma += item;
-    },10));
+    },0));
     //Retorna a soma igual a 63
-
-    // return
     let soma_num= numeros.reduce((soma, item, indice, numeros) =>{
         console.log(`\t\t${indice} | ${item} |  ${soma} | ${numeros.length}`) 
         return soma += item
     }, 10);
-    console.log(soma_num);
-    
+    console.log(soma_num);    
 }

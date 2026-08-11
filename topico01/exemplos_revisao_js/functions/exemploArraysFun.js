@@ -23,9 +23,11 @@ console.log('Adicionamos o limão:');
 console.table(frutas);
 
 //MÉTODO POP: Remove da última posição
+console.table(carros);
 carros.pop();
 console.log('Removemos o celta:');
 console.table(carros);
+
 //PESQUISE OS MÉTODOS SHIFT E UNSHIFT
 
 //MÉTODO SPLICE
@@ -49,11 +51,18 @@ console.log(`NOVA FRUTA É ${frutas[2]}`);
 const ordenaArray = ()=>{
 
      let num = [1, 9, 5, 6, 3, 2]
+     let prods = [
+               {n:'a',p:2.99},
+               {n:'c',p:.99},
+               {n:'b',p:1.99}
+          ]
      console.table(num)
 
      console.log("ASC",num.sort((a,b)=>a-b))
 
      console.log("DESC",num.sort((a,b)=>b-a))
+
+     console.log('PROD PRICE:',prods.sort((a,b)=>a.p-b.p))
 }
 
 export {ordenaArray}
