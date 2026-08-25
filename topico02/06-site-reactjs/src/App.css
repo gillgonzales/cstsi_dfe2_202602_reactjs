@@ -149,15 +149,6 @@
   box-sizing: border-box;
 }
 
-.footer_container {
-  height: 20vh;
-  background-color: var(--primary-color);
-}
-
-.footer_container h2 {
-  color: aliceblue;
-}
-
 .header {
   padding-bottom: 2.5rem;
   background-color: var(--primary-color);

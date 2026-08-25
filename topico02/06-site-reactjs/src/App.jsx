@@ -27,9 +27,6 @@ function App() {
           </div>
         </div>
       </main>
-      <div className="footer_container">
-        <h2>Rodapé</h2>
-      </div>
     </>
   )
 }
