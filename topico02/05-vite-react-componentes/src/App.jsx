@@ -35,12 +35,23 @@ const users = [
 ];
 
 function App() {
+
+
+  // const ProfilesRener = []
+  // users.forEach((user, i)=>{
+  //   ProfilesRener.push(<Profile key={i} user={user} />)
+  // })
+
   return (
-    <> 
-      <Profile key={users[0].name} user={users[0]} />
+    <>
+      {/* Map */}
+      {users.map((user, i) => (<Profile key={i} user={user} />))}
+      {/* ForEach */}
+      {/* {ProfilesRener} */}
+      {/* <Profile key={users[0].name} user={users[0]} />
       <Profile key={users[1].name} user={users[1]} />
       <Profile key={users[2].name} user={users[2]} />
-      <Profile key={users[3].name} user={users[3]} />
+      <Profile key={users[3].name} user={users[3]} /> */}
     </>
   );
 }
