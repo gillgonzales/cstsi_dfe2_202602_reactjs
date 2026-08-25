@@ -14,12 +14,12 @@ const users = [
     imageSize: 90,
     wiki: 'https://pt.wikipedia.org/wiki/Ada_Lovelace',
   },
-  {
-    name: 'Isaac Newton',
-    imageUrl: 'https://pt.wikipedia.org/wiki/Isaac_Newton#/media/Ficheiro:Portrait_of_Sir_Isaac_Newton,_1689_\(brightened\).jpg',
-    imageSize: 90,
-    wiki: 'https://pt.wikipedia.org/wiki/Isaac_Newton',
-  },
+  // {
+  //   name: 'Isaac Newton',
+  //   imageUrl: 'https://pt.wikipedia.org/wiki/Isaac_Newton#/media/Ficheiro:Portrait_of_Sir_Isaac_Newton,_1689_(brightened).jpg',
+  //   imageSize: 90,
+  //   wiki: 'https://pt.wikipedia.org/wiki/Isaac_Newton',
+  // },
   {
     name: 'Galileu',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg',
@@ -41,7 +41,6 @@ function App() {
       <Profile key={users[1].name} user={users[1]} />
       <Profile key={users[2].name} user={users[2]} />
       <Profile key={users[3].name} user={users[3]} />
-      <Profile key={users[4].name} user={users[4]} />
     </>
   );
 }
