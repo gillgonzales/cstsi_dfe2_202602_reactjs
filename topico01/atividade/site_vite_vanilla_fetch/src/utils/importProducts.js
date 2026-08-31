@@ -7,7 +7,7 @@ function renderProducts(listProducts){
 export async function fetchProducts(){
    // products = mockedProducts.reverse()
 
-   const response = await fetch('http://localhost:8000/produtos')
+   const response = await fetch('http://localhost:8000/api/produtos')
    console.log(response)
    const products = await response.json()
    console.log(products)
