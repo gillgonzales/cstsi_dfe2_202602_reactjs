@@ -33,10 +33,11 @@ export default class AdaClass extends Component {
 
   changeData = () => {
     let new_data = {
-      name: 'Ada Lovalace',
+     name: this.state.data.name.includes('lace') ? 'Ada' : 'Ada Lovalace',
       imageUrl: this.state.data.imageUrl,
-      imageSize: 200,
+      imageSize: this.state.data.imageSize != 200 ? 200 : 100,
     };
+    
     this.setState({
       //useState
       data: new_data,
