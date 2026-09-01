@@ -1,5 +1,5 @@
 import './App.css';
-import CardImc from './components/CardImc/CardImc_useEffect.jsx';
+import CardImc from './components/CardImc/CardImc_hookFlow.jsx';
 
 function App() {
   return (
