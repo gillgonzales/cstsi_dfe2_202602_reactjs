@@ -5,7 +5,6 @@ import App from './App.jsx'
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Link,
   Route,
   RouterProvider,
 } from 'react-router';
@@ -41,6 +40,6 @@ const routerElements = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={routerObjects} />
+    <RouterProvider router={routerElements} />
   </StrictMode>,
 )
