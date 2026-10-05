@@ -10,8 +10,10 @@
     z-index: 1;
     background: white; /*var(--main-bg-color);*/
     max-width: 360px;
-    padding: 34px;
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
+    padding: 34px;    
+    border: solid 1px var(--ligth-blue);
+    border-radius: 2%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 255, 0.1);
   }
 
   h1 {
