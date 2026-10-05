@@ -4,7 +4,8 @@ function App() {
   return (
     <>
       <h1>Exemplo de Rotas com React Router</h1>
-       <Link to="/ola">Rota Olá</Link><hr/>
+       <Link to="/ola">Rota Olá(Link)</Link><hr/>
+       {/* <a href="/ola">Rota Olá</a><hr/> */}
     </>
   )
 }
