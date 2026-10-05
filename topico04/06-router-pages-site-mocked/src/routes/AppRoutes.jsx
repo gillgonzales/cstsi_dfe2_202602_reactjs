@@ -1,6 +1,4 @@
 import {
-    createBrowserRouter,
-    createRoutesFromElements,
     Route,
     Routes,
     BrowserRouter,
@@ -32,7 +30,6 @@ export const AppRoutes = () => (
                 <Route path="/login" element={<Login />} />I
                 <Route path="/register" element={<SignUp />} />
             </Route>
-
         </Routes>
     </BrowserRouter>
 )
