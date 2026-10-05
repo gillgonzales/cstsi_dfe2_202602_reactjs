@@ -8,7 +8,7 @@ const Guest = () => {
         <div>
             <Head/>
             <main>
-            <Outlet />
+                <Outlet />
             </main>
             <Footer/>
         </div>
