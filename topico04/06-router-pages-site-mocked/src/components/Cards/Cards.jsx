@@ -8,6 +8,7 @@ export const Cards = ({ item }) => {
   return (
     <div className="card_container">
       <Link to={`/produto/${item.id}`}>
+      {/* <a href={`/produto/${item.id}`}> */}
         <div className="card_main">
           <h3 className="card_name">{item.nome}</h3>
           <div className="card_thumb">
@@ -26,6 +27,7 @@ export const Cards = ({ item }) => {
             : <p>Sem Fornecedor</p>
           }
         </div>
+        {/* </a> */}
       </Link>
     </div>
   );
