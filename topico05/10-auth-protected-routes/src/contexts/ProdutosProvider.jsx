@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
 import { mockedProducts } from "../mocks/mockedProducts";
+import { fetchAllProdutos } from "../api/serviceProdutos";
 
 const MAX_TIMEOUT = 500;
 const MOCKED_PRODUCTS = mockedProducts.reverse();
@@ -20,6 +21,7 @@ const ProdutosProvider = ({ children }) => {
 
   const loadProdutos = () => {
     setTimeout(() =>setListProdutos(MOCKED_PRODUCTS), MAX_TIMEOUT);
+    fetchAllProdutos().then(data=>setListProdutos(data))
   }
 
   const findById = (id) => {
@@ -30,7 +32,7 @@ const ProdutosProvider = ({ children }) => {
 
   const filterProdutos = (searchTerm) => {
     const filteredProducts = MOCKED_PRODUCTS.filter((product) => {
-      return product.nome.toLowerCase().includes(searchTerm.toLowerCase())
+      return product.nome.toLowerCase().includes(searchTerm.toLowerCase())   
     })
     setListProdutos(filteredProducts)
   }
