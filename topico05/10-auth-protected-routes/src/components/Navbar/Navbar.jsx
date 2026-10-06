@@ -23,9 +23,7 @@ export const Navbar = () => {
     <nav className={`nav_container ${theme}`}>
       <div className="nav_logo">
         <Link to="/">
-        {/* <a href='/'> */}
           <img src={appLogo} className="nav_logo_img" />
-        {/* </a> */}
         </Link>
       </div>
       <div className="nav_links">
@@ -44,9 +42,9 @@ export const Navbar = () => {
               Dashboard
             </Link>
             <div className="logout">
-              <a href="#" onClick={onLogout} >
+              <Link to="#" onClick={onLogout} >
                 <img src={logoutIcon} />
-              </a>
+              </Link>
             </div>
           </>
         }
