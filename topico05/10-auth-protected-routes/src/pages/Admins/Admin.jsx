@@ -1,7 +1,7 @@
 
 const Admin = () => {
   return (
-    <div>Painel Administrativo!</div>
+    <div><h2>Painel Administrativo!</h2></div>
   )
 }
 
