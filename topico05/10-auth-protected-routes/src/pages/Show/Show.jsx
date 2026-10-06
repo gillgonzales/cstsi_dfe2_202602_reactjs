@@ -34,6 +34,7 @@ const Show = () => {
                 }
             </div>
             <Link to="/">Voltar</Link>
+            {/* <a href='/'>Voltar (a)</a> */}
         </div>
     );
 };

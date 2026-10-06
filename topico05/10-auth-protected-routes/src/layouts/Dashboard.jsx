@@ -28,9 +28,9 @@ const DashboardLayout = () => {
                 {/* </DefaultLogo> */}
                 <div>Bem vindo !</div>
                 <div className="logout">
-                    <a href="#" onClick={onLogout} >
+                    <Link to="#" onClick={onLogout} >
                         <img src={logoutIcon} />
-                    </a>
+                    </Link>
                 </div>
             </header>
             {/* <main> */}
