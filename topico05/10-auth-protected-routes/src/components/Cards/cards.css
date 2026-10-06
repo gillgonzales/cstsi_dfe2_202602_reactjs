@@ -49,7 +49,7 @@
 .card_price {
   text-align: center;
   font-weight: 700;
-  color: var(--primary-color);
+  color: var(--secondary-color);
   text-shadow: #f3f4f6;
 }
 
@@ -64,6 +64,9 @@
   color: #0c0c0c;
 }
 
+.card_dark{
+  background-color: var(--dark-primary-color);
+}
 
 
 @media (min-width: 640px) {
