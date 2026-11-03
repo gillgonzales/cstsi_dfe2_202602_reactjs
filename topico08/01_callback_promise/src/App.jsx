@@ -47,9 +47,9 @@ function App() {
         <button
           onClick={() =>
             funcPromise("Hello")
-              .then(fun => fun("World"))//resolvida
-              .then(fun => fun("Promise"))
-              .then(fun => fun("Chaning"))
+              .then(f => f("World"))//resolvida
+              .then(f => f("Promise"))
+              .then(f => f("Chaning"))
           }
         >
           Promise Chaning
