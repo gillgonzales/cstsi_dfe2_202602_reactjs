@@ -17,7 +17,15 @@ const ProdutosProvider = ({ children }) => {
 
   const loadProdutos = async (id = null) => {
 
-    
+    //cache
+    if (data?.length > 0 && id) {
+      console.log({ data, id })
+      let produto = data.find(p => p.id === +id)
+      if (produto) {
+        setData(produto);
+        return true;
+      }
+    }
 
     try {
       const url = id ? `${API_URL}/produtos/${id}` : `${API_URL}/produtos`;
