@@ -2,8 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import tempLogo from "./assets/temp.svg";
 import "./App.css";
 
-const apiKey = "d3d6d9dab7494ac9a0d22629242511";
-const api_url = "http://api.weatherapi.com/v1";
+const apiKey = import.meta.env.VITE_API_KEY;
+const api_url =  import.meta.env.VITE_API_URL;
 
 const allowGeolocation = () => {
   if ("geolocation" in navigator) {
