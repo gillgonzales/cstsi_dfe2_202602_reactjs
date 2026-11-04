@@ -20,18 +20,17 @@ const ProdutosProvider = ({ children }) => {
     }
 
     const loadProdutos = async () => {
-        if (data) return data;
+        if (data?.length>0) return data;
         const produtos = await fetchProdutosApi()
         setData(produtos)
         return produtos;
     }
 
     const findProduto = async (id) => {
-
-        // if(getCachedData(id))
-        //     // return true;
+        let produto = getCachedData(id)
+        if(produto) return produto;
         console.log('find', id)
-        const produto = await fetchProdutosApi(id)
+        produto = await fetchProdutosApi(id)
         return produto;
     }
 
@@ -49,16 +48,14 @@ const ProdutosProvider = ({ children }) => {
         return true;//TODO
     }
 
-    // const getCachedData = (id) => {
-    //     if (data?.length > 0 && id) {
-    //         console.log({ data, id })
-    //         let produto = data.find(p => p.id === +id)
-    //         if (produto) {
-    //             setData(produto);
-    //             return true;
-    //         }
-    //     }
-    // }
+    const getCachedData = (id) => {
+        if (data?.length > 0 && id) {
+            console.log({ data, id })
+            let produto = data.find(p => p.id === +id)
+            if (produto) return produto;
+            return null
+        }
+    }
 
     return (
         <ProdutosContext.Provider value={contextValue}>
