@@ -7,6 +7,7 @@ export const Cards = ({ item }) => {
       <Link to={`/produto/${item.id}`}>
         <div className="w-full py-3 pt-2.5">
           <h3 className="mb-3 text-center font-bold">{item.nome}</h3>
+          {item?.fornecedor && <h5 className="text-sm">{item.fornecedor.nome}</h5>}
           <div className="flex h-[350px] w-full items-center bg-sky-100 md:h-[200px] md:w-full">
             <img className="h-5/6 w-full object-fill" src={`${item?.image?item.image:imgThumb}`} />
           </div>
