@@ -5,7 +5,7 @@ import { createContext, useState, useContext, useEffect, useRef } from "react"
 import axiosClient from "../utils/axios-client";
 
 
-const VEIRIFY_USER_INTERVAL = import.meta.env.VEIRIFY_USER_INTERVAL
+const VERIFY_USER_INTERVAL = import.meta.env.VITE_VERIFY_USER_INTERVAL
 
 const verifyUser = async () => {
     try {
@@ -92,13 +92,12 @@ export const AuthProvider = ({ children }) => {
             if (!user) setToken(null)
             console.log(user)
             setUser(user)
-        }, VEIRIFY_USER_INTERVAL)
-
+        }, VERIFY_USER_INTERVAL)
 
         return () => {
             clearInterval(intervalLogin.current);
         }
-    }, [user]);
+    }, []);
 
 
     return (

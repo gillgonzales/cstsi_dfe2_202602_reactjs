@@ -3,9 +3,9 @@
 import { createContext, useState, useContext, useEffect, useRef } from "react"
 import { axiosClient, BASE_URL } from "../utils/axios-client";
 
-const VEIRIFY_USER_INTERVAL = import.meta.env.VITE_VEIRIFY_USER_INTERVAL
+const VERIFY_USER_INTERVAL = import.meta.env.VITE_VERIFY_USER_INTERVAL
 
-console.error(VEIRIFY_USER_INTERVAL)
+console.error(VERIFY_USER_INTERVAL)
 
 const verifyUser = async () => {
     try {
@@ -114,7 +114,7 @@ export const AuthProvider = ({ children }) => {
                 const isLogged = await verifyLogin();
                 setIsLogged(isLogged);
                 !isLogged && clearAuthStorages();
-            }, VEIRIFY_USER_INTERVAL)
+            }, VERIFY_USER_INTERVAL)
         }
 
         return () => {
