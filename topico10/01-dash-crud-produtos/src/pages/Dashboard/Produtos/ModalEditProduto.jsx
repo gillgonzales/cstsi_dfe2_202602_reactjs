@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import Modal from '../../../components/Modal/Modal'
 import { useProdutosContext } from '../../../contexts/ProdutosProvider'
+import { useFornecedoresContext } from '../../../contexts/FornecedoresProvider'
 
 const ModalEditProduto = ({ close, editedProduto }) => {
   const {editProduto} = useProdutosContext()
-  const listFornecedores = [{id:1, nome:"FornecedorFake"}];//Implementar provider de fornecedor e context
+  const {data, loadFornecedores} = useFornecedoresContext();
+  const listFornecedores = data
+  const isLoadedFornecedores = listFornecedores?.length > 0;
   const [disableButton, setDisableButton] = useState(true)
   const [message, setMessage] = useState(null)
 
@@ -23,6 +26,7 @@ const ModalEditProduto = ({ close, editedProduto }) => {
     qtdEstoque.current.value = editedProduto?.qtd_estoque
     preco.current.value = editedProduto?.preco
     isImportado.current.checked = !!editedProduto?.importado
+    loadFornecedores()
   }, [])
 
   const handleNome = (e) => {
@@ -72,7 +76,8 @@ const ModalEditProduto = ({ close, editedProduto }) => {
         inputProdutoNome.current.value.trim().length >= 5 &&
         inputProdutoDescricao.current.value.trim().length > 0 &&
         Number(qtdEstoque.current.value) > 0 &&
-        Number(preco.current.value) > 0
+        Number(preco.current.value) > 0 &&
+        isLoadedFornecedores
       )
   };
 
@@ -139,7 +144,7 @@ const ModalEditProduto = ({ close, editedProduto }) => {
           />
         </div>
 
-        {listFornecedores && 
+        {isLoadedFornecedores && 
           <>
             <label>Fornecedor:</label>
             <select name="fornecedor_id" ref={selectedFornecedorId}

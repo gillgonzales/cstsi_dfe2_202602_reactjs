@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import Modal from "../../../components/Modal/Modal";
 import { useProdutosContext } from "../../../contexts/ProdutosProvider";
+import { useFornecedoresContext } from "../../../contexts/FornecedoresProvider";
 
 const ModalAddProduto = ({ close }) => {
   const { addProduto } = useProdutosContext();
-  const listFornecedores = [{ id: 1, nome: "FornecedorFake" }];//Implementar provider de fornecedor e context
+  const {data, loadFornecedores} = useFornecedoresContext();
+  const listFornecedores = data
+  const isLoadedFornecedores = listFornecedores?.length > 0;
   const [disableButton, setDisableButton] = useState(true);
   const [message, setMessage] = useState(null);
 
@@ -22,7 +25,8 @@ const ModalAddProduto = ({ close }) => {
         inputProdutoDescricao.current.value.trim().length > 0 &&
         inputProdutoDescricao.current.value.trim().length <= 500 &&
         Number(inputQdEstoque.current.value) > 0 &&
-        +inputPreco.current.value > 0
+        +inputPreco.current.value > 0 &&
+        isLoadedFornecedores
       )
     );
   };
@@ -42,6 +46,11 @@ const ModalAddProduto = ({ close }) => {
     setMessage(message);
     setTimeout(close, 3000);
   };
+
+
+  useEffect(()=>{
+    loadFornecedores()
+  },[])
 
   return (
     <Modal title={`Cadastrar Produto:`} close={close}>
@@ -87,7 +96,7 @@ const ModalAddProduto = ({ close }) => {
               </div>
 
 
-              {listFornecedores &&
+              {isLoadedFornecedores &&
                 <>
                   <label>Fornecedor:</label>
                   <select name="fornecedor_id" ref={selectedFornecedorId}>
