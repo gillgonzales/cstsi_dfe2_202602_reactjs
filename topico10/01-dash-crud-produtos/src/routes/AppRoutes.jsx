@@ -11,8 +11,9 @@ import Login from "../pages/Login/Login";
 import Cadastro from "../pages/Cadastro/Cadastro";
 import Users from "../pages/Users/Users_use";
 import Produtos from "../pages/Dashboard/Produtos/Produtos";
-// import FornecedoresPage from "../pages/Dashboard/fornecedores/FornecedoresPage";
+import FornecedoresPage from "../pages/Dashboard/fornecedores/FornecedoresPage";
 import NotFound from "../pages/NotFound/NotFound";
+import FornecedoresProvider from "../contexts/FornecedoresProvider";
 
 export const AppRoutes = () => {
   return (<BrowserRouter>
@@ -23,11 +24,16 @@ export const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound/>}/>
       </Route>
-      <Route path="/" element={<Private><DashLayout /></Private>}>
+      <Route path="/" element={
+        <Private>
+          <FornecedoresProvider>
+            <DashLayout />
+          </FornecedoresProvider>
+        </Private>}>
         <Route path="/dashboard" element={<Produtos />} />
         <Route path="/users" element={<Users />} />
         <Route path="/cadastro" element={<Cadastro />} />
-        {/* <Route path="/fornecedores" element={<FornecedoresPage />} /> */}
+        <Route path="/fornecedores" element={<FornecedoresPage />} />
       </Route>
     </Routes>
   </BrowserRouter>)
