@@ -1,13 +1,14 @@
 import { useEffect } from 'react'
-// import { useFornecedorContext } from '../../../contexts/FornecedorProvider'
+import { useFornecedoresContext } from '../../../contexts/FornecedoresProvider'
 
 const FornecedoresPage = () => {
 
-    // const {listFornecedores, loadFornecedores } = useFornecedorContext()
-    const listFornecedores = [];
+    const {data, loadFornecedores } = useFornecedoresContext()
+    const listFornecedores = data;
+    const isLoaded = listFornecedores?.length > 0
 
     useEffect(() => {
-        // loadFornecedores()
+        loadFornecedores()
     }, [])
 
     return (
@@ -21,7 +22,7 @@ const FornecedoresPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {listFornecedores?.length > 0
+                    {isLoaded
                         ? listFornecedores.map((fornecedor, k) =>
                             <tr key={k}>
                                 <td>{fornecedor.nome}</td>
