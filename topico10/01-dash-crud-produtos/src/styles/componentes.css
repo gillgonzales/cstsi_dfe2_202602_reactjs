@@ -1,0 +1,15 @@
+
+@layer components {
+
+  .btn {
+    /* border: 1px solid transparent; */
+     /* @apply py-[0.6em] px-[1.2em] text-[1em] font-medium font-[inherit] cursor-pointer transition-[border-color] duration-[250ms] rounded-[8px]; */
+    @apply font-['Roboto',sans-serif] rounded-lg outline-none bg-primary-500 border-0 no-underline px-3 py-2 text-secondary m-0.5;
+
+    @variant focus{
+      outline: 4px auto -webkit-focus-ring-color;
+    }
+  }
+}
+
+
