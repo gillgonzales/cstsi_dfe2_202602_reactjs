@@ -1,18 +1,24 @@
-import { useEffect } from 'react'
+import { Suspense, use } from 'react'
 import { useFornecedoresContext } from '../../../contexts/FornecedoresProvider'
+
+const RowsFornecedores = ({fornecedoresPromisse})=>{
+  const listFornecedores = use(fornecedoresPromisse)
+  return listFornecedores.map((fornecedor, k) =>(
+                           <tr key={k}>
+                                <td>{fornecedor.nome}</td>
+                                <td>{fornecedor.cnpj}</td>
+                                <td>{fornecedor.email}</td>
+                            </tr>))
+}
 
 const FornecedoresPage = () => {
 
-    const {data, loadFornecedores } = useFornecedoresContext()
-    const listFornecedores = data;
-    const isLoaded = listFornecedores?.length > 0
-
-    useEffect(() => {
-        loadFornecedores()
-    }, [])
+    const {loadFornecedoresSuspense } = useFornecedoresContext()
+    const fornecedoresPromisse = loadFornecedoresSuspense()    
 
     return (
         <div>
+        
             <table>
                 <thead>
                     <tr>
@@ -22,16 +28,9 @@ const FornecedoresPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {isLoaded
-                        ? listFornecedores.map((fornecedor, k) =>
-                            <tr key={k}>
-                                <td>{fornecedor.nome}</td>
-                                <td>{fornecedor.cnpj}</td>
-                                <td>{fornecedor.email}</td>
-                            </tr>
-                        )
-                        : <></>
-                    }
+                    <Suspense fallback={<tr><td colSpan={3}>Carregando</td></tr>}>
+                        <RowsFornecedores fornecedoresPromisse={fornecedoresPromisse}/>
+                    </Suspense>
                 </tbody>
             </table>
         </div>
