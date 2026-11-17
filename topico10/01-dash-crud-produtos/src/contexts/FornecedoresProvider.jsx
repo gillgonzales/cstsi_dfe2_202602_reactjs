@@ -25,6 +25,22 @@ const FornecedoresProvider = ({ children }) => {
     }
   };
 
+  const loadFornecedoresSuspense = async (id = null) => {
+    const url = resourceUrl + (id ? `/${id}` : '');
+    try {
+      const {data} = await axiosClient.get(url);
+
+      if (!data)
+        throw new Error("Erro ao carregar fornecedores");
+
+      Array.isArray(data) && data.reverse();
+      return data;
+    } catch (error) {
+      console.log(error);
+      setError(error?.message)
+    }
+  };
+
   const addFornecedor = async (payload=null) => {
     //TODO
     // try{
@@ -76,6 +92,7 @@ const FornecedoresProvider = ({ children }) => {
         data,
         error,
         loadFornecedores,
+        loadFornecedoresSuspense,
         setData,
         addFornecedor,
         editFornecedor,
