@@ -3,7 +3,6 @@
 import { Navigate, Outlet, useNavigate } from "react-router";
 import { useAuthContext } from "../contexts/AuthProvider";
 import { Link } from "react-router";
-import { useEffect, useState } from "react";
 import appLogo from "../assets/appLogo.svg";
 import logoutIcon from "../assets/logout.svg";
 
@@ -19,32 +18,28 @@ export const Private = ({ children }) => {
 
 export const Protected = ({ children }) => {
   const { isLogged } = useAuthContext();
-  const [isProtected, setIsProtected] = useState(false)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (!isLogged) navigate('/login')
-    if (isLogged === true) setIsProtected(isLogged)
-  }, [isLogged])
+  if (!isLogged) navigate('/login')
+  if (isLogged === true) return children
+
 
   return (
-    isProtected
-      ? children
-      : <div className="dashboard-layout">
-        <header>
-          <div className="dashboard-header-logo">
-            <Link to="/">
-              <img src={appLogo} />
-            </Link>
-          </div>
-          <div>Dashboard</div>
-        </header>
-        <main>
-          <section>
-            <p>Verificando autenticação...</p>
-          </section>
-        </main>
-      </div>
+    <div className="dashboard-layout">
+      <header>
+        <div className="dashboard-header-logo">
+          <Link to="/">
+            <img src={appLogo} />
+          </Link>
+        </div>
+        <div>Dashboard</div>
+      </header>
+      <main>
+        <section>
+          <p>Verificando autenticação...</p>
+        </section>
+      </main>
+    </div>
   );
 }
 
@@ -63,7 +58,7 @@ export default function DashLayout() {
     <div className="dashboard-layout">
       <header>
         <div className="dashboard-header-logo">
-          <Link to="/">  
+          <Link to="/">
             <img src={appLogo} />
           </Link>
         </div>
