@@ -24,6 +24,7 @@ const ProdutosProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
       setError(error?.message)
+      throw new Error(error?.message)
     }
   };
 
@@ -31,7 +32,10 @@ const ProdutosProvider = ({ children }) => {
     try{
       if(!produto) throw Error("Produto não informado");
       console.log(`Cadastrar novo produto:`,{produto});
-      const {data} = await axiosClient.post(resourceEndpoint, produto)
+      const {data} = await axiosClient.post(resourceEndpoint, produto,
+         {
+          headers: { "Content-Type": "multipart/form-data" }
+      });
       if(!data) throw new Error("Erro ao atualizar produto");
       const dataApi = data?.data;
       const {message} = data;
