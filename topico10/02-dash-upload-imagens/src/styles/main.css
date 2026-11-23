@@ -1,0 +1,575 @@
+@import "tailwindcss";
+@import "./themes.css";
+@import "./componentes.css";
+@import "./utilities.css";
+
+:root {
+  --primary-color: #4ade80;
+  --dark-green: #40b96c;
+  --second-color: #1e40af;
+  --light-blue: #60a5fa;
+  --light-gray: #f6f6f6;
+  --light-gray-100: #e6e6e6;
+  --dark-grey: #939393;
+  --add-confirm-color: #00a762;
+  --remove-cancel-color: #b72424;
+  --table-bg-color: #efefef;
+  --main-bg-color: white;
+  --default-grey-color: #b3b3b3;
+}
+
+* {
+  @apply box-border;
+}
+
+html,
+body,
+#root {
+  @apply min-h-screen;
+}
+
+#root {
+  @apply w-full;
+}
+
+body {
+  @apply m-0 flex min-h-screen min-w-[320px] justify-center text-sm text-[#212121];
+  background-color: var(--light-gray);
+  font-family: "Open Sans", sans-serif;
+}
+
+body div {
+  @apply text-center;
+  align-items: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  @apply m-0 min-h-8;
+}
+
+input {
+  @apply mb-3.75 w-full border-2 border-[#e6e6e6] bg-white p-3.75 text-sm outline-none transition-all;
+}
+
+input:focus,
+input:hover,
+select:focus,
+select:hover {
+  border-color: var(--second-color);
+}
+
+input::placeholder {
+  color: var(--light-blue);
+}
+
+select {
+  @apply mb-[15px] w-full border-2 border-[#e6e6e6] bg-white p-[15px] text-sm outline-none transition-all;
+}
+
+.btn,
+.btn-add,
+.btn-edit,
+.btn-delete,
+.btn-cancel,
+.btn-disabled {
+  @apply cursor-pointer border-0 p-[15px] text-base no-underline;
+  font-family: "Roboto", sans-serif;
+}
+
+.btn-edit {
+  background-color: var(--primary-color);
+  color: var(--second-color);
+  transition: all 0.3s ease;
+}
+
+
+.btn:active,
+.btn:focus {
+  background-color: var(--second-color);
+  color: var(--primary-color);
+}
+
+.btn-disabled {
+  @apply block;
+  background-color: var(--dark-grey);
+  color: var(--light-gray);
+}
+
+.btn-block {
+  @apply w-full;
+}
+
+.btn-add,
+.btn-edit,
+.btn-delete,
+.btn-cancel {
+  @apply rounded px-3 py-2 text-sm;
+}
+
+.btn-add {
+  background-color: var(--add-confirm-color);
+}
+
+.btn-delete {
+  background-color: var(--remove-cancel-color);
+  color: white;
+}
+
+.btn-cancel {
+  margin-right: 2px;
+  background-color: var(--dark-grey);
+  color: white;
+}
+
+.btn-logout {
+  @apply rounded-md px-6 py-3 text-[#212121];
+}
+
+.btn-logout:hover {
+  background-color: rgb(0 0 0 / 10%);
+}
+
+table {
+  @apply w-full border-collapse;
+  border-spacing: 0;
+}
+
+table > thead > tr > th {
+  @apply px-2 py-2 text-left;
+  background-color: var(--table-bg-color);
+}
+
+table > tbody > tr > td {
+  @apply whitespace-nowrap border-b px-2 py-2;
+  border-color: var(--table-bg-color);
+}
+
+.message-error {
+  @apply text-sm;
+  color: var(--remove-cancel-color);
+}
+
+.guest-layout > main {
+  @apply flex min-h-[60vh] w-full justify-center p-3;
+}
+
+@media (min-width: 640px) {
+  .guest-layout > main {
+    @apply p-10;
+  }
+}
+
+.dashboard-layout {
+  @apply flex flex-col;
+}
+
+.dashboard-layout > header {
+  @apply flex h-20 w-full items-center justify-between bg-white px-12 py-8;
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 20%);
+}
+
+.dashboard-layout > main {
+  @apply flex w-full flex-col;
+  min-height: 50vh;
+}
+
+.dashboard-layout > main > section {
+  @apply w-full p-8;
+}
+
+.dashboard-sidebar {
+  @apply h-[50px] w-full rounded-b-[20%] bg-(--dark-green) p-4;
+}
+
+.dashboard-sidebar > a {
+  @apply invisible hidden text-(--dark-green);
+}
+
+.dashboard-sidebar > a:last-child {
+  @apply visible block font-bold text-white no-underline;
+}
+
+.dashboard-sidebar:hover {
+  @apply h-auto;
+}
+
+.dashboard-sidebar:hover > a {
+  @apply visible block rounded-md px-4 py-3 text-white no-underline;
+}
+
+.dashboard-sidebar:hover > a:last-child {
+  @apply invisible hidden;
+}
+
+.dashboard-sidebar > a:hover {
+  background-color: rgb(0 0 0 / 20%);
+}
+
+.dashboard-header-logo {
+  @apply flex w-1/4 justify-start;
+}
+
+.dashboard-header-logo img {
+  @apply w-12;
+}
+
+.dashboard-logout-icon {
+  @apply ml-auto justify-end;
+}
+
+.dashboard-logout-icon img {
+  @apply w-6.25;
+}
+
+@media (min-width: 450px) {
+  .dashboard-layout > main {
+    @apply flex-row;
+  }
+
+  .dashboard-sidebar {
+    @apply h-screen min-w-50 w-50 rounded-br-[20%] rounded-bl-none;
+  }
+
+  .dashboard-sidebar > a {
+    @apply visible block rounded-md px-4 py-3 text-white no-underline;
+  }
+
+  .dashboard-sidebar > a:last-child {
+    @apply invisible hidden;
+  }
+
+  .dashboard-sidebar:hover {
+    @apply h-screen;
+  }
+}
+
+.card-container {
+  @apply h-full w-full rounded-lg border-2 border-blue-700 bg-primary;
+  aspect-ratio: 3 / 4;
+  box-shadow: 0 2px 6px #438c5e, 0 3px 6px #438c5e;
+}
+
+.card-link {
+  @apply block h-full no-underline;
+}
+
+.card-main {
+  @apply flex h-[96%] flex-col justify-around overflow-hidden pt-3 pb-3 text-justify;
+  text-overflow: ellipsis;
+}
+
+.card-main h3 {
+  @apply mb-3 text-center font-bold text-[#0c0c0c];
+}
+
+.card-main h4 {
+  @apply text-center font-bold text-blue-800;
+  text-shadow: #f3f4f6;
+}
+
+.card-main p {
+  @apply block w-[90%] overflow-hidden px-2.5 py-[5px] text-[#0c0c0c];
+  font-size: 3vw;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-image {
+  @apply flex h-[350px] w-full items-center bg-sky-100;
+}
+
+.card-image img {
+  @apply h-[83.33%] w-full;
+  aspect-ratio: 3 / 4;
+  object-fit: fill;
+}
+
+@media (min-width: 640px) {
+  .card-main p {
+    @apply text-center text-[#0c0c0c] min-h-4;
+    font-size: 2vw;
+  }
+
+  .card-image img {
+    aspect-ratio: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-container {
+    @apply overflow-hidden;
+  }
+
+  .card-main p {
+    @apply text-base;
+  }
+
+  .card-image {
+    @apply h-[200px] w-full;
+  }
+}
+
+.footer-container {
+  @apply h-[20vh] bg-primary-500;
+}
+
+.footer-container h2 {
+  color: aliceblue;
+}
+
+.modal-overlay {
+  @apply fixed inset-0 flex min-h-screen w-full justify-center bg-black/50;
+}
+
+.modal-panel {
+  @apply absolute top-[5vh] flex h-auto max-h-[700px] min-w-[250px] w-[80%] flex-col items-center justify-around rounded-xl border-2 border-blue-800 bg-white p-[2.5vh];
+  box-shadow: 0 7px 29px rgb(100 100 111 / 30%);
+}
+
+.modal-panel > div {
+  @apply flex h-3/4 w-[95%] flex-col items-center justify-start;
+}
+
+.modal-panel h1 {
+  @apply mb-[0.3rem];
+}
+
+@media (min-width: 480px) {
+  .modal-panel {
+    @apply w-[70vw];
+  }
+}
+
+@media (min-width: 768px) {
+  .modal-panel {
+    @apply w-[65vw];
+  }
+}
+
+.header-banner {
+  @apply h-fit bg-primary pb-10;
+}
+
+.header-banner-content {
+  @apply flex flex-col items-center justify-center;
+}
+
+.header-banner-content h1 {
+  @apply mt-12 mb-6 w-full text-center text-6xl leading-none font-bold text-blue-800;
+  text-shadow: #fff;
+}
+
+.header-banner-content h4 {
+  @apply w-5/6 rounded-lg bg-blue-400 p-1 text-center font-light text-[aliceblue];
+}
+
+.header-banner-content h4 > span {
+  @apply text-[10px];
+}
+
+@media (min-width: 1024px) {
+  .header-banner-content h4 {
+    @apply w-1/2;
+  }
+}
+
+.navbar {
+  @apply flex max-h-16 justify-between bg-blue-800 pt-2;
+}
+
+.navbar-logo {
+  @apply flex w-1/4 justify-start;
+}
+
+.navbar-logo img {
+  @apply h-12 w-12;
+}
+
+.navbar-links {
+  @apply flex w-3/4 flex-row justify-around text-center;
+}
+
+.navbar-links a {
+  @apply mt-4 text-sm leading-5 text-[darkgray];
+}
+
+.navbar-links a:hover {
+  @apply text-[whitesmoke];
+}
+
+@media (min-width: 450px) {
+  .navbar-links {
+    @apply w-[30%];
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-links {
+    @apply w-1/4;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar-links {
+    @apply w-1/5;
+  }
+}
+
+@media (min-width: 1280px) {
+  .navbar-links {
+    @apply w-[15%];
+  }
+}
+
+@media (min-width: 1960px) {
+  .navbar-links {
+    @apply w-[10%];
+  }
+}
+
+@media (min-width: 2200px) {
+  .navbar-links {
+    @apply w-[8%];
+  }
+}
+
+.home-main,
+.show-main {
+  @apply w-full;
+}
+
+.home-grid {
+  @apply mx-auto grid h-fit min-h-8 grid-cols-1 gap-x-8 gap-y-5;
+}
+
+@media (min-width: 640px) {
+  .home-grid {
+    @apply grid-cols-2;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-grid {
+    @apply grid-cols-3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-grid {
+    @apply grid-cols-4;
+  }
+}
+
+@media (min-width: 1536px) {
+  .home-main,
+  .show-main {
+    @apply max-w-7xl;
+  }
+
+  .home-grid {
+    @apply grid-cols-5 gap-8;
+  }
+}
+
+.show-grid {
+  @apply mx-auto grid h-[95%] min-h-80 w-[70vw] grid-cols-1 gap-x-8 gap-y-5;
+}
+
+@media (min-width: 640px) {
+  .show-grid {
+    @apply w-1/2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .show-grid {
+    @apply w-[40vw];
+  }
+}
+
+@media (min-width: 1536px) {
+  .show-grid {
+    @apply w-[20vw] gap-8;
+  }
+}
+
+.login-page {
+  @apply flex h-[50vh] items-center justify-center;
+}
+
+.login-page form {
+  @apply relative z-1 w-[360px] max-w-[360px] bg-white p-[34px];
+  box-shadow: 0 0 2px rgb(0 0 0 / 10%);
+}
+
+.login-page h1 {
+  @apply mb-4 text-center text-[28px] text-blue-800;
+}
+
+.login-page p {
+  @apply mt-[15px] text-center text-base text-[#b3b3b3];
+}
+
+.login-page p a {
+  @apply text-blue-800 no-underline;
+}
+
+.login-page .login-error {
+  @apply text-red-600;
+}
+
+.produto-actions,
+.action-buttons {
+  @apply m-2.5 flex flex-row;
+}
+
+.produto-actions {
+  @apply w-full justify-start;
+}
+
+.action-buttons {
+  @apply justify-around;
+}
+
+.input-checkbox {
+  @apply m-2.5 flex w-[90%] flex-row items-center justify-center;
+}
+
+.input-checkbox span {
+  @apply font-bold;
+}
+
+.input-checkbox input {
+  @apply m-0 mr-[5px] w-[30px];
+}
+
+.produto-dashboard-title {
+  @apply mb-4 text-xl font-bold;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root,
+  body {
+    color: rgb(255 255 255 / 87%);
+    background-color: #1a1a1a;
+  }
+
+  h2 {
+    color: var(--primary-color);
+    text-shadow: var(--primary-color) 0 0 5px;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
