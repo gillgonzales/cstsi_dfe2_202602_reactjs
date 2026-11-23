@@ -69,7 +69,7 @@ input::placeholder {
 }
 
 select {
-  @apply mb-[15px] w-full border-2 border-[#e6e6e6] bg-white p-[15px] text-sm outline-none transition-all;
+  @apply mb-3.75 w-full border-2 border-[#e6e6e6] bg-white p-[15px] text-sm outline-none transition-all;
 }
 
 .btn,
@@ -184,7 +184,7 @@ table > tbody > tr > td {
 }
 
 .dashboard-sidebar {
-  @apply h-[50px] w-full rounded-b-[20%] bg-(--dark-green) p-4;
+  @apply h-12.5 w-full rounded-b-[20%] bg-(--dark-green) p-4;
 }
 
 .dashboard-sidebar > a {
@@ -328,7 +328,7 @@ table > tbody > tr > td {
 }
 
 .modal-panel {
-  @apply absolute top-[5vh] flex h-auto max-h-[700px] min-w-[250px] w-[80%] flex-col items-center justify-around rounded-xl border-2 border-blue-800 bg-white p-[2.5vh];
+  @apply absolute top-[5vh] flex h-auto max-h-220 min-w-62.5 w-[80%] flex-col items-center justify-around rounded-xl border-2 border-blue-800 bg-white p-[2.5vh];
   box-shadow: 0 7px 29px rgb(100 100 111 / 30%);
 }
 
@@ -338,6 +338,10 @@ table > tbody > tr > td {
 
 .modal-panel h1 {
   @apply mb-[0.3rem];
+}
+
+.modal-panel form label {
+  @apply font-bold text-secondary
 }
 
 @media (min-width: 480px) {
