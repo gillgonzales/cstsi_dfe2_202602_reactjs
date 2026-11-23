@@ -1,0 +1,66 @@
+@layer theme{
+ @theme {
+   --color-primary-light: #dceded;
+  }
+}
+
+@theme {
+
+  --color-green: oklch(57.54% 0.17967 143.72);
+--color-green-50: oklch(84.412% 0.17849 145.86);
+--color-green-100: oklch(83.063% 0.19796 145.32);
+--color-green-200: oklch(80.174% 0.22955 144.38);
+--color-green-300: oklch(77.088% 0.2442 143.64);
+--color-green-400: oklch(67.63% 0.21285 143.7);
+--color-green-500: oklch(57.54% 0.17967 143.72);
+--color-green-600: oklch(43.351% 0.13202 143.92);
+--color-green-700: oklch(27.517% 0.07837 144.46);
+--color-green-800: oklch(0% 0 none);
+--color-green-900: oklch(0% 0 none);
+--color-green-950: oklch(0% 0 none);
+
+--color-primary: oklch(82.065% 0.21122 144.39);
+--color-primary-50: oklch(99.216% 0.00742 151.89);
+--color-primary-100: oklch(96.923% 0.03101 146.81);
+--color-primary-200: oklch(92.621% 0.08131 146.45);
+--color-primary-300: oklch(88.766% 0.12876 145.87);
+--color-primary-400: oklch(85.028% 0.17308 145.16);
+--color-primary-500: oklch(82.065% 0.21122 144.39);
+--color-primary-600: oklch(78.783% 0.24779 143.37);
+--color-primary-700: oklch(67.048% 0.21372 143.27);
+--color-primary-800: oklch(53.474% 0.1683 143.34);
+--color-primary-900: oklch(38.669% 0.11788 143.48);
+--color-primary-950: oklch(30.897% 0.09103 143.71);
+  
+  
+    --color-secondary: oklch(42.445% 0.18087 265.64);
+--color-secondary-50: oklch(75.29% 0.09696 270.2);
+--color-secondary-100: oklch(70.958% 0.11597 270.57);
+--color-secondary-200: oklch(62.755% 0.15276 268.99);
+--color-secondary-300: oklch(54.931% 0.18937 267.05);
+--color-secondary-400: oklch(48.288% 0.20935 265.48);
+--color-secondary-500: oklch(42.445% 0.18087 265.64);
+--color-secondary-600: oklch(34.067% 0.13994 266.13);
+--color-secondary-700: oklch(25.4% 0.09415 266.75);
+--color-secondary-800: oklch(15.662% 0.04381 266.78);
+--color-secondary-900: oklch(0% 0 none);
+--color-secondary-950: oklch(0% 0 none);
+  
+  --color-mydark: oklch(26.032% 0 none);
+
+  --color-mydark-50: oklch(59.987% 0 none);
+  --color-mydark-100: oklch(56.584% 0 none);
+  --color-mydark-200: oklch(49.261% 0 none);
+  --color-mydark-300: oklch(42.024% 0 none);
+  --color-mydark-400: oklch(34.07% 0 none);
+  --color-mydark-500: oklch(26.032% 0 none);
+  --color-mydark-600: oklch(13.441% 0 none);
+  --color-mydark-700: oklch(0% 0 none);
+  --color-mydark-800: oklch(0% 0 none);
+  --color-mydark-900: oklch(0% 0 none);
+  --color-mydark-950: oklch(0% 0 none);
+
+}
+
+ /*#242424*/
+/*https://www.shadecolr.com/#v=3&data=eyJjb2xvcnMiOlt7ImlkIjoiY29sb3ItMSIsImJhc2VDb2xvciI6WzIyNS45MzEwMzQ0ODI3NTg2LDcwLjczMTcwNzMxNzA3MzE3LDQwLjE5NjA3ODQzMTM3MjU1XSwiYmFzZVN0b3AiOjUsInN0ZXBVcCI6OCwic3RlcERvd24iOjExLCJodWVTaGlmdCI6MCwic2F0dXJhdGlvbkFkanVzdCI6MCwidGVtcGVyYXR1cmUiOjAsImNvbnRyYXN0Qm9vc3QiOjAsImxpZ2h0bmVzc0N1cnZlIjoxLCJvdmVycmlkZXMiOnt9LCJuYW1lIjoibmF2eSIsImN1c3RvbU5hbWUiOiIiLCJsb2NrZWQiOmZhbHNlfV0sInBhbGV0dGVOYW1lIjoiIn0%3D*/
