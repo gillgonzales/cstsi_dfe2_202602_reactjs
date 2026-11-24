@@ -3,16 +3,17 @@ import Modal from '../../../components/Modal/Modal'
 import { useProdutosContext } from '../../../contexts/ProdutosProvider'
 import { useFornecedoresContext } from '../../../contexts/FornecedoresProvider'
 import imageUrl from '../../../assets/img/cards-thumbnail.jpg';
+import { useNavigate, useParams } from 'react-router';
 
-const ModalEditProduto = ({ close, editedProduto }) => {
-  const {editProduto} = useProdutosContext()
-  const {data, loadFornecedores} = useFornecedoresContext();
-  const listFornecedores = data
+const ModalEditProduto = () => {
+  const { data, editProduto } = useProdutosContext()
+  const [editedProduto, setEditedProduto] = useState(null)
+  const { listFornecedores, loadFornecedores } = useFornecedoresContext();
   const isLoadedFornecedores = listFornecedores?.length > 0;
   const [disableButton, setDisableButton] = useState(true)
   const [message, setMessage] = useState(null)
 
-  console.log(editedProduto)
+  const { id } = useParams()
 
   const inputProdutoNome = useRef(null)
   const inputProdutoDescricao = useRef(null)
@@ -24,18 +25,31 @@ const ModalEditProduto = ({ close, editedProduto }) => {
   const imageRef = useRef(null)
   const inputFileRef = useRef(null)
 
+  const navigate = useNavigate();
+  const close = ()=>navigate("/dashboard")
 
   useEffect(() => {
+    console.info(id, data)
+    if (data?.length && !editedProduto) {
+      const editedProduto = data?.find(produto => produto.id == id)
+      console.log({ editedProduto })
+      setEditedProduto(editedProduto)
+    }
+  }, [data])
+
+
+  useEffect(() => {
+    if (!editedProduto) return
     inputProdutoNome.current.value = editedProduto?.nome
     inputProdutoDescricao.current.value = editedProduto?.descricao
     qtdEstoque.current.value = editedProduto?.qtd_estoque
     preco.current.value = editedProduto?.preco
     isImportado.current.checked = !!editedProduto?.importado
-    imageRef.current.src = editedProduto?.medias?.length > 0 
-                                        ? editedProduto.medias[0].source
-                                        : imageUrl
+    imageRef.current.src = editedProduto?.medias?.length > 0
+      ? editedProduto.medias[0].source
+      : imageUrl
     loadFornecedores()
-  }, [])
+  }, [editedProduto])
 
   const handleNome = (e) => {
     const nome = e.target.value;
@@ -44,7 +58,7 @@ const ModalEditProduto = ({ close, editedProduto }) => {
       validateRequiredFields()
       && nome.trim() !== editedProduto?.nome.trim()
     ))
-    
+
   }
 
   const handleDescricao = (e) => {
@@ -100,120 +114,121 @@ const ModalEditProduto = ({ close, editedProduto }) => {
 
 
   const validateRequiredFields = () => {
-      return (
-        inputProdutoNome.current.value.trim().length >= 5 &&
-        inputProdutoDescricao.current.value.trim().length > 0 &&
-        Number(qtdEstoque.current.value) > 0 &&
-        Number(preco.current.value) > 0 &&
-        isLoadedFornecedores
-      )
+    return (
+      inputProdutoNome.current.value.trim().length >= 5 &&
+      inputProdutoDescricao.current.value.trim().length > 0 &&
+      Number(qtdEstoque.current.value) > 0 &&
+      Number(preco.current.value) > 0 &&
+      isLoadedFornecedores
+    )
   };
 
 
   const onSubmit = async (e) => {
     e.preventDefault()
     console.log('submit')
-    const message = await editProduto( editedProduto?.id, {
+    const message = await editProduto(editedProduto?.id, {
       nome: inputProdutoNome.current.value,
       descricao: inputProdutoDescricao.current.value,
       qtd_estoque: qtdEstoque.current.value,
       preco: preco.current.value,
       importado: isImportado.current.checked,
-      fornecedor_id:selectedFornecedorId.current.value
+      fornecedor_id: selectedFornecedorId.current.value
     })
     setMessage(message)
-    setTimeout(close,3000)
-
+    setTimeout(close, 3000)
   }
 
   return <Modal
-      title={`Atualizar Produto:`}
-      close={close}
-    >
-      { message
-          ? <p className='message'>{message}</p>
-          : <form action="" method="get" onSubmit={onSubmit}>
-         <div className="flex flex-col items-center justify-around sm:flex-row ">
-          <img id="image-tag"
-            className="block w-48 h-40 object-scale-down mr-2.5"
-            src={imageUrl}
-            ref={imageRef}
-          />
+    title={`Atualizar Produto:`}
+    close={close}
+  >
+    {message
+      ? <p className='message'>{message}</p>
+      : !editedProduto
+        ? <p className='message'>"Preparando form..."</p>
+        : <form action="" method="get" onSubmit={onSubmit}>
+          <div className="flex flex-col items-center justify-around sm:flex-row ">
+            <img id="image-tag"
+              className="block w-48 h-40 object-scale-down mr-2.5"
+              src={imageUrl}
+              ref={imageRef}
+            />
+            <input
+              className="mt-3.75 inline w-1/2"
+              id='image-field'
+              type="file"
+              name="imagem"
+              onChange={handleSelectedImage}
+              ref={inputFileRef} />
+          </div>
+          <label>Nome</label>
           <input
-            className="mt-3.75 inline w-1/2"
-            id='image-field'
-            type="file"
-            name="imagem"
-            onChange={handleSelectedImage}
-            ref={inputFileRef} />
-        </div>
-        <label>Nome</label>
-        <input
-          type="text"
-          placeholder="Nome do Produto"
-          name="name"
-          onChange={handleNome}
-          ref={inputProdutoNome}
-        />
-         <label>Descrição:</label>
-        <input
-          type="text"
-          placeholder="Descrição do Produto"
-          name="descricao"
-          onChange={handleDescricao}
-          ref={inputProdutoDescricao}
-        />
-        <label>Quantidade em Estoque:</label>
-        <input
-          type="number"
-          onChange={handleQtdEstoque}
-          ref={qtdEstoque}
-          name="qtd_estoque"
-        />
-         <label>Preço (R$):</label>
-        <input
-          type="number"
-          name="preco"
-          step="0.01"
-          ref={preco}
-          onChange={handlePreco}
-        />
-        <div className="input-checkbox">
-          <span> Importado? </span>
-          <input
-            type="checkbox"
-            name="importao"
-            ref={isImportado}
-            onChange={handleImportado}
+            type="text"
+            placeholder="Nome do Produto"
+            name="name"
+            onChange={handleNome}
+            ref={inputProdutoNome}
           />
-        </div>
+          <label>Descrição:</label>
+          <input
+            type="text"
+            placeholder="Descrição do Produto"
+            name="descricao"
+            onChange={handleDescricao}
+            ref={inputProdutoDescricao}
+          />
+          <label>Quantidade em Estoque:</label>
+          <input
+            type="number"
+            onChange={handleQtdEstoque}
+            ref={qtdEstoque}
+            name="qtd_estoque"
+          />
+          <label>Preço (R$):</label>
+          <input
+            type="number"
+            name="preco"
+            step="0.01"
+            ref={preco}
+            onChange={handlePreco}
+          />
+          <div className="input-checkbox">
+            <span> Importado? </span>
+            <input
+              type="checkbox"
+              name="importao"
+              ref={isImportado}
+              onChange={handleImportado}
+            />
+          </div>
 
-        {isLoadedFornecedores && 
-          <>
-            <label>Fornecedor:</label>
-            <select name="fornecedor_id" ref={selectedFornecedorId}
-              onChange={()=>setDisableButton(selectedFornecedorId.current.value === editedProduto?.fornecedor_id)}
-            >
-              {listFornecedores.map((fornecedor, i) => (
-                <option 
-                  key={i} 
-                  value={fornecedor.id} 
-                  selected={fornecedor.id===editedProduto.fornecedor_id}
-                > {fornecedor.nome}</option>
-              ))}
-            </select>
-          </>
-        }
+          {isLoadedFornecedores &&
+            <>
+              <label>Fornecedor:</label>
+              <select name="fornecedor_id" ref={selectedFornecedorId}
+                onChange={() => setDisableButton(selectedFornecedorId.current.value === editedProduto?.fornecedor_id)}
+              >
+                {listFornecedores.map((fornecedor, i) => (
+                  <option
+                    key={i}
+                    value={fornecedor.id}
+                    selected={fornecedor.id === editedProduto.fornecedor_id}
+                  > {fornecedor.nome}</option>
+                ))}
+              </select>
+            </>
+          }
 
-        <button
-          className={disableButton ? "btn-disabled btn-block" : "btn btn-block"}
-          disabled={disableButton ? "disabled" : ""}
-        >
-          Atualizar Produto
-        </button>
-      </form>
-      }
-    </Modal>
+          <button
+            className={disableButton ? "btn-disabled btn-block" : "btn btn-block"}
+            disabled={disableButton ? "disabled" : ""}
+          >
+            Atualizar Produto
+          </button>
+        </form>
+    }
+  </Modal>
 }
 
 export default ModalEditProduto
