@@ -7,8 +7,7 @@ import { useNavigate } from "react-router";
 
 const ModalAddProduto = ({ close }) => {
   const { addProduto } = useProdutosContext();
-  const { data, loadFornecedores } = useFornecedoresContext();
-  const listFornecedores = data
+  const { listFornecedores, loadFornecedores } = useFornecedoresContext();
   const isLoadedFornecedores = listFornecedores?.length > 0;
   const [disableButton, setDisableButton] = useState(true);
   const [message, setMessage] = useState(null);
