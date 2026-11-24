@@ -3,6 +3,7 @@ import Modal from "../../../components/Modal/Modal";
 import { useProdutosContext } from "../../../contexts/ProdutosProvider";
 import { useFornecedoresContext } from "../../../contexts/FornecedoresProvider";
 import imageUrl from '../../../assets/img/cards-thumbnail.jpg';
+import { useNavigate } from "react-router";
 
 const ModalAddProduto = ({ close }) => {
   const { addProduto } = useProdutosContext();
@@ -18,6 +19,8 @@ const ModalAddProduto = ({ close }) => {
   const inputPreco = useRef(null);
   const inputIsImportado = useRef(null);
   const selectedFornecedorId = useRef(null);
+
+  const navigate = useNavigate();
 
   const imageRef = useRef(null)
   const inputFileRef = useRef(null)
@@ -78,7 +81,7 @@ const ModalAddProduto = ({ close }) => {
   }, [])
 
   return (
-    <Modal title={`Cadastrar Produto:`} close={close}>
+    <Modal title={`Cadastrar Produto:`} close={()=>navigate('/dashboard')}>
       {
         message//falsy (0,undefined, null, NaN, "0")
           ? <p className="message">{message}</p>
