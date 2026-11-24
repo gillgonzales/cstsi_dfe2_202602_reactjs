@@ -14,6 +14,7 @@ import Produtos from "../pages/Dashboard/Produtos/Produtos";
 import FornecedoresPage from "../pages/Dashboard/fornecedores/FornecedoresPage";
 import NotFound from "../pages/NotFound/NotFound";
 import FornecedoresProvider from "../contexts/FornecedoresProvider";
+import ModalAddProduto from "../pages/Dashboard/Produtos/ModalAddProduto";
 
 export const AppRoutes = () => {
   return (<BrowserRouter>
@@ -30,7 +31,13 @@ export const AppRoutes = () => {
             <DashLayout />
           </FornecedoresProvider>
         </Private>}>
-        <Route path="/dashboard" element={<Produtos />} />
+        <Route path="dashboard" element={<Produtos />}>
+          <Route path="produtos">
+            <Route path="create" element={
+                <ModalAddProduto/>
+            }/>
+          </Route>
+        </Route>
         <Route path="/users" element={<Users />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/fornecedores" element={<FornecedoresPage />} />
