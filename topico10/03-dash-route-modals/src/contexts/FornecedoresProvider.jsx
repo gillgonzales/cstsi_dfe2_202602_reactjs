@@ -90,7 +90,7 @@ const FornecedoresProvider = ({ children }) => {
   return (
     <FornecedoresContext.Provider
       value={{
-        data,
+        listFornecedores: data,
         error,
         loadFornecedores,
         loadFornecedoresSuspense,
