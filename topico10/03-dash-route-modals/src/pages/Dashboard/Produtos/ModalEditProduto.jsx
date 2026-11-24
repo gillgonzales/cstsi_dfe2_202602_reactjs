@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import Modal from '../../../components/Modal/Modal'
 import { useProdutosContext } from '../../../contexts/ProdutosProvider'
 import { useFornecedoresContext } from '../../../contexts/FornecedoresProvider'
+import imageUrl from '../../../assets/img/cards-thumbnail.jpg';
 
 const ModalEditProduto = ({ close, editedProduto }) => {
   const {editProduto} = useProdutosContext()
@@ -20,12 +21,19 @@ const ModalEditProduto = ({ close, editedProduto }) => {
   const isImportado = useRef(null)
   const selectedFornecedorId = useRef(null);
 
+  const imageRef = useRef(null)
+  const inputFileRef = useRef(null)
+
+
   useEffect(() => {
     inputProdutoNome.current.value = editedProduto?.nome
     inputProdutoDescricao.current.value = editedProduto?.descricao
     qtdEstoque.current.value = editedProduto?.qtd_estoque
     preco.current.value = editedProduto?.preco
     isImportado.current.checked = !!editedProduto?.importado
+    imageRef.current.src = editedProduto?.medias?.length > 0 
+                                        ? editedProduto.medias[0].source
+                                        : imageUrl
     loadFornecedores()
   }, [])
 
@@ -71,6 +79,26 @@ const ModalEditProduto = ({ close, editedProduto }) => {
   }
 
 
+  const handleSelectedImage = (e) => {
+    console.log(e.target.files)
+
+    const imageFile = e.target.files[0]
+    const reader = new FileReader();
+
+    reader.addEventListener(
+      "load",
+      () => {
+        // convert image file to base64 string
+        // debugger
+        imageRef.current.src = reader.result;
+      },
+      false,
+    );
+
+    imageFile && reader.readAsDataURL(imageFile);
+  }
+
+
   const validateRequiredFields = () => {
       return (
         inputProdutoNome.current.value.trim().length >= 5 &&
@@ -102,7 +130,23 @@ const ModalEditProduto = ({ close, editedProduto }) => {
       title={`Atualizar Produto:`}
       close={close}
     >
-      <form action="" method="get" onSubmit={onSubmit}>
+      { message
+          ? <p className='message'>{message}</p>
+          : <form action="" method="get" onSubmit={onSubmit}>
+         <div className="flex flex-col items-center justify-around sm:flex-row ">
+          <img id="image-tag"
+            className="block w-48 h-40 object-scale-down mr-2.5"
+            src={imageUrl}
+            ref={imageRef}
+          />
+          <input
+            className="mt-3.75 inline w-1/2"
+            id='image-field'
+            type="file"
+            name="imagem"
+            onChange={handleSelectedImage}
+            ref={inputFileRef} />
+        </div>
         <label>Nome</label>
         <input
           type="text"
@@ -168,7 +212,7 @@ const ModalEditProduto = ({ close, editedProduto }) => {
           Atualizar Produto
         </button>
       </form>
-      {message && <p className="message">{message}</p>}
+      }
     </Modal>
 }
 
