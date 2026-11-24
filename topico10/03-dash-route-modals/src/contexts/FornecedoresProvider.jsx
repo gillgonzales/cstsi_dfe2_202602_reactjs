@@ -10,6 +10,7 @@ const FornecedoresProvider = ({ children }) => {
   const resourceUrl = '/fornecedores'
 
   const loadFornecedores = async (id = null) => {
+    if(data) return;
     const url = resourceUrl + (id ? `/${id}` : '');
     try {
       const {data} = await axiosClient.get(url);
