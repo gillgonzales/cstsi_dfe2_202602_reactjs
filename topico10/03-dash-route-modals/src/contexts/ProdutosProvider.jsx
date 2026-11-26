@@ -18,8 +18,6 @@ const ProdutosProvider = ({ children }) => {
 
       if (!dataApi)
         throw new Error("Erro ao carregar produtos");
-
-      Array.isArray(dataApi) && dataApi.reverse();
       setData(dataApi);
     } catch (error) {
       console.log(error);
