@@ -3,8 +3,10 @@ import { useProdutosContext } from '../../../contexts/ProdutosProvider.jsx'
 import ProdutoTable from '../../../components/Tables/ProdutoTable/ProdutoTable.jsx'
 import ModalRemoveProduto from './ModalRemoveProduto.jsx'
 import { Outlet, useNavigate } from 'react-router'
+import { useAuthContext } from '../../../contexts/AuthProvider.jsx'
 
 const Produtos = () => {
+  const {isAdmin} = useAuthContext()
   const { data, loadProdutos } = useProdutosContext()
   const [showModalRemove, setShowModalRemove] = useState(false)
   const [produtoAtual, setProdutoAtual] = useState({})
@@ -30,11 +32,13 @@ const Produtos = () => {
   return (<div>
     <h2 className="produto-dashboard-title">Produtos Dashboard</h2>
     <div className="produto-actions">
-      <button 
-        className="btn primary"
-        onClick={()=>{navigate('/dashboard/produtos/create')}}>
-        Novo Produto
-      </button>
+     { isAdmin &&
+        <button 
+          className="btn primary"
+          onClick={()=>{navigate('/dashboard/produtos/create')}}>
+          Novo Produto
+        </button> 
+      } 
     </div>
     {isLoaded
       ? <ProdutoTable

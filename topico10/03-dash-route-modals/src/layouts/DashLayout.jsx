@@ -44,7 +44,7 @@ export const Protected = ({ children }) => {
 }
 
 export default function DashLayout() {
-  const { user, logOut } = useAuthContext();
+  const { user, logOut, isAdmin } = useAuthContext();
   console.log({ user });
   const navigate = useNavigate();
 
@@ -74,7 +74,7 @@ export default function DashLayout() {
           <Link to="/dashboard">Produtos</Link>
           <Link to="/users">Users</Link>
           <Link to="/cadastro">Novo User</Link>
-          <Link to="/fornecedores">Gerenciar Fornecedores</Link>
+          {isAdmin && <Link to="/fornecedores">Gerenciar Fornecedores</Link>}
           <Link to="#">Menu</Link>
         </aside>
         <section>
