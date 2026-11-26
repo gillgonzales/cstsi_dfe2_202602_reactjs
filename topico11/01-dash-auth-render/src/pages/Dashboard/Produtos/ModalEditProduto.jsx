@@ -1,0 +1,236 @@
+import { useEffect, useRef, useState } from 'react'
+import Modal from '../../../components/Modal/Modal'
+import { useProdutosContext } from '../../../contexts/ProdutosProvider'
+import { useFornecedoresContext } from '../../../contexts/FornecedoresProvider'
+import imageUrl from '../../../assets/img/cards-thumbnail.jpg';
+import { useNavigate, useParams } from 'react-router';
+
+const ModalEditProduto = () => {
+  const { data, editProduto } = useProdutosContext()
+  const [editedProduto, setEditedProduto] = useState(null)
+  const { listFornecedores, loadFornecedores } = useFornecedoresContext();
+  const isLoadedFornecedores = listFornecedores?.length > 0;
+  const [disableButton, setDisableButton] = useState(true)
+  const [message, setMessage] = useState(null)
+
+  const { id } = useParams()
+
+  const inputProdutoNome = useRef(null)
+  const inputProdutoDescricao = useRef(null)
+  const qtdEstoque = useRef(null)
+  const preco = useRef(null)
+  const isImportado = useRef(null)
+  const selectedFornecedorId = useRef(null);
+
+  const imageRef = useRef(null)
+  const inputFileRef = useRef(null)
+
+  const navigate = useNavigate();
+  const close = ()=>navigate("/dashboard")
+
+  useEffect(() => {
+    console.info(id, data)
+    if (data?.length && !editedProduto) {
+      const editedProduto = data?.find(produto => produto.id == id)
+      console.log({ editedProduto })
+      setEditedProduto(editedProduto)
+    }
+  }, [data])
+
+
+  useEffect(() => {
+    if (!editedProduto) return
+    inputProdutoNome.current.value = editedProduto?.nome
+    inputProdutoDescricao.current.value = editedProduto?.descricao
+    qtdEstoque.current.value = editedProduto?.qtd_estoque
+    preco.current.value = editedProduto?.preco
+    isImportado.current.checked = !!editedProduto?.importado
+    imageRef.current.src = editedProduto?.medias?.length > 0
+      ? editedProduto.medias[0].source
+      : imageUrl
+    loadFornecedores()
+  }, [editedProduto])
+
+  const handleNome = (e) => {
+    const nome = e.target.value;
+    console.log('Nome', e.target.value)
+    setDisableButton(!(
+      validateRequiredFields()
+      && nome.trim() !== editedProduto?.nome.trim()
+    ))
+
+  }
+
+  const handleDescricao = (e) => {
+    const descricao = e.target.value;
+    const oldDescricao = editedProduto?.descricao
+    setDisableButton(!(
+      validateRequiredFields()
+      && descricao.trim() !== oldDescricao.trim()
+    ))
+  }
+
+  const handleQtdEstoque = (e) => {
+    const qtdEstoque = Number(e.target.value);
+    setDisableButton(!(
+      validateRequiredFields()
+      && qtdEstoque != editedProduto?.qtd_estoque
+    ))
+  }
+
+  const handlePreco = (e) => {
+    console.log('Preco', Number(e.target.value))
+    console.log('Preco diff', +e.target.valueOf() !== +editedProduto?.preco)
+    setDisableButton(!(
+      validateRequiredFields()
+      && +e.target.value !== +editedProduto?.preco
+    ))
+  }
+
+  const handleImportado = (e) => {
+    // console.log(!!e.target.checked, !!editedProduto?.importado)
+    setDisableButton(!(e.target?.checked !== !!editedProduto?.importado))
+  }
+
+
+  const handleSelectedImage = (e) => {
+    console.log(e.target.files)
+
+    const imageFile = e.target.files[0]
+    const reader = new FileReader();
+
+    reader.addEventListener(
+      "load",
+      () => {
+        // convert image file to base64 string
+        // debugger
+        imageRef.current.src = reader.result;
+      },
+      false,
+    );
+
+    imageFile && reader.readAsDataURL(imageFile);
+  }
+
+
+  const validateRequiredFields = () => {
+    return (
+      inputProdutoNome.current.value.trim().length >= 5 &&
+      inputProdutoDescricao.current.value.trim().length > 0 &&
+      Number(qtdEstoque.current.value) > 0 &&
+      Number(preco.current.value) > 0 &&
+      isLoadedFornecedores
+    )
+  };
+
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    console.log('submit')
+    const message = await editProduto(editedProduto?.id, {
+      nome: inputProdutoNome.current.value,
+      descricao: inputProdutoDescricao.current.value,
+      qtd_estoque: qtdEstoque.current.value,
+      preco: preco.current.value,
+      importado: isImportado.current.checked,
+      fornecedor_id: selectedFornecedorId.current.value
+    })
+    setMessage(message)
+    setTimeout(close, 3000)
+  }
+
+  return <Modal
+    title={`Atualizar Produto:`}
+    close={close}
+  >
+    {message
+      ? <p className='message'>{message}</p>
+      : !editedProduto
+        ? <p className='message'>"Preparando form..."</p>
+        : <form action="" method="get" onSubmit={onSubmit}>
+          <div className="flex flex-col items-center justify-around sm:flex-row ">
+            <img id="image-tag"
+              className="block w-48 h-40 object-scale-down mr-2.5"
+              src={imageUrl}
+              ref={imageRef}
+            />
+            <input
+              className="mt-3.75 inline w-1/2"
+              id='image-field'
+              type="file"
+              name="imagem"
+              onChange={handleSelectedImage}
+              ref={inputFileRef} />
+          </div>
+          <label>Nome</label>
+          <input
+            type="text"
+            placeholder="Nome do Produto"
+            name="name"
+            onChange={handleNome}
+            ref={inputProdutoNome}
+          />
+          <label>Descrição:</label>
+          <input
+            type="text"
+            placeholder="Descrição do Produto"
+            name="descricao"
+            onChange={handleDescricao}
+            ref={inputProdutoDescricao}
+          />
+          <label>Quantidade em Estoque:</label>
+          <input
+            type="number"
+            onChange={handleQtdEstoque}
+            ref={qtdEstoque}
+            name="qtd_estoque"
+          />
+          <label>Preço (R$):</label>
+          <input
+            type="number"
+            name="preco"
+            step="0.01"
+            ref={preco}
+            onChange={handlePreco}
+          />
+          <div className="input-checkbox">
+            <span> Importado? </span>
+            <input
+              type="checkbox"
+              name="importao"
+              ref={isImportado}
+              onChange={handleImportado}
+            />
+          </div>
+
+          {isLoadedFornecedores &&
+            <>
+              <label>Fornecedor:</label>
+              <select name="fornecedor_id" ref={selectedFornecedorId}
+                onChange={() => setDisableButton(selectedFornecedorId.current.value === editedProduto?.fornecedor_id)}
+              >
+                {listFornecedores.map((fornecedor, i) => (
+                  <option
+                    key={i}
+                    value={fornecedor.id}
+                    selected={fornecedor.id === editedProduto.fornecedor_id}
+                  > {fornecedor.nome}</option>
+                ))}
+              </select>
+            </>
+          }
+
+          <button
+            className={disableButton ? "btn-disabled btn-block" : "btn btn-block"}
+            disabled={disableButton ? "disabled" : ""}
+          >
+            Atualizar Produto
+          </button>
+        </form>
+    }
+  </Modal>
+}
+
+export default ModalEditProduto
+
+//https://react.dev/reference/react-dom/createPortal#rendering-a-modal-dialog-with-a-portal
