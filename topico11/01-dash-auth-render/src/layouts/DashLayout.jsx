@@ -72,8 +72,8 @@ export default function DashLayout() {
       <main>
         <aside className="dashboard-sidebar">
           <Link to="/dashboard">Produtos</Link>
-          <Link to="/users">Users</Link>
-          <Link to="/cadastro">Novo User</Link>
+          {isAdmin && <Link to="/users">Users</Link>}
+          {isAdmin && <Link to="/cadastro">Novo User</Link>}
           {isAdmin && <Link to="/fornecedores">Gerenciar Fornecedores</Link>}
           <Link to="#">Menu</Link>
         </aside>
