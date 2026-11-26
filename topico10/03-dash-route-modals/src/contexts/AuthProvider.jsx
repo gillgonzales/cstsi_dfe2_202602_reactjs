@@ -126,6 +126,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             user,
             isLogged,
+            isAdmin : !!user?.is_admin,
             auth,
             logOut,
         }}>
